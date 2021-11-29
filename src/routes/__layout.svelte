@@ -1,40 +1,19 @@
 <script>
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
-	import 'bootstrap/dist/css/bootstrap.css';
-
-	import Scroller from '@sveltejs/svelte-scroller';
-
-	let index, offset, progress;
 </script>
 
-<Scroller top={0.2} bottom={5} bind:index bind:offset bind:progress>
-	<div slot="background">
-		<Header />
+<Header />
 
-		<main>
-			<slot />
-		</main>
+<main>
+	<slot />
+</main>
 
-		<footer>
-			<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-		</footer>
-	</div>
-
-	<div slot="foreground">
-		<img src="/images/fern-bg.png" class="photo" />
-	</div>
-</Scroller>
+<footer>
+	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+</footer>
 
 <style>
-	.photo {
-		object-fit: cover;
-		top: 10;
-		left: 0;
-		width: 100%;
-		height: 100vh;
-	}
-
 	main {
 		flex: 1;
 		display: flex;
