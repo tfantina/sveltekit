@@ -1,26 +1,20 @@
-<script context="module">
-	export async function load({ fetch, page }) {
-		const res = await fetch(`/blog/blog.json`);
-		if (res.ok) {
-			return {
-				props: {
-					posts: await res.json()
-				}
-			};
-		}
-
-		return {
-			status: res.status,
-			error: new Error('Small problem')
-		};
-	}
-</script>
-
 <script>
 	export let posts;
-	console.log(posts);
 </script>
 
-<svelte:head>
-	<title>test</title>
-</svelte:head>
+<div class="container">
+	<div class="row">
+		<div class="col-6">
+			<h2>Dispatches</h2>
+			{#each posts as post}
+				<div class="row d-flex justify-content-between">
+					<div class="">
+						<h3>{post.metadata.title}</h3>
+					</div>
+					<div>{post.metadata.date}</div>
+				</div>
+			{/each}
+		</div>
+		<div class="col-6" />
+	</div>
+</div>

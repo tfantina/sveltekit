@@ -1,5 +1,21 @@
 <script context="module">
 	export const prerender = true;
+	export async function load({ fetch, page }) {
+		const res = await fetch(`/blog/blog.json?length=5`);
+
+		if (res.ok) {
+			return {
+				props: {
+					posts: await res.json()
+				}
+			};
+		}
+
+		return {
+			status: res.status,
+			error: new Error('Small problem')
+		};
+	}
 </script>
 
 <script>
@@ -9,6 +25,8 @@
 	import Scroller from '@sveltejs/svelte-scroller';
 
 	let count, index, offset, progress;
+
+	export let posts;
 </script>
 
 <svelte:head>
@@ -22,7 +40,6 @@
 			offset: {offset}
 			index: {index}
 		</div>
-
 		<div slot="foreground">
 			<section />
 		</div>
@@ -30,7 +47,7 @@
 	<div class="intro">
 		<h1 style="opacity: {1 - progress}; transform: scale({1 * 1.1 + offset})">Travis Fantina</h1>
 		<h2 class="intro-heading" style="opacity: {1 - progress}; transform: scale({1 * 1.1 + offset})">
-			development & design
+			development & designs
 			<br />
 			a repository of projects and writings
 		</h2>
@@ -41,7 +58,7 @@
 <div class="bg-page" />
 <About />
 <Projects />
-<Dispatches />
+<Dispatches {posts} />
 
 <style>
 	[slot='background'] {
