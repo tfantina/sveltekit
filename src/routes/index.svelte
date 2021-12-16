@@ -2,11 +2,14 @@
 	export const prerender = true;
 	export async function load({ fetch, page }) {
 		const res = await fetch(`/blog/blog.json?length=5`);
+		const projects = await fetch('/projects/projects.json');
 
-		if (res.ok) {
+		console.log(projects);
+		if (res.ok && projects.ok) {
 			return {
 				props: {
-					posts: await res.json()
+					posts: await res.json(),
+					projects: await projects.json()
 				}
 			};
 		}
@@ -26,7 +29,7 @@
 
 	let count, index, offset, progress;
 
-	export let posts;
+	export let posts, projects;
 </script>
 
 <svelte:head>
@@ -57,7 +60,7 @@
 
 <div class="bg-page" />
 <About />
-<Projects />
+<Projects  {projects} />
 <Dispatches {posts} />
 
 <style>
