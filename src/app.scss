@@ -1,4 +1,6 @@
 @import '@fontsource/fira-mono';
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import 'styles/bootstrap_overrides';
 
 @font-face {
 	font-family: 'Tropikal';
@@ -120,18 +122,17 @@ body {
 	justify-content: center;
 	height:350px;
 	width: 350px;
-}
 
-.img-card--content {
-	position: absolute;
-	display: flex;
-	z-index: 100;
+	img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		position: absolute;
+	}
 
-}
-
-.img-card > img {
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
-	position: absolute;
+	&--content {
+		position: absolute;
+		display: flex;
+		z-index: 100;
+	}
 }

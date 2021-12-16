@@ -11,8 +11,10 @@
 		{#each projects as project}
 		<div class="img-card">
 			<div class="img-card--content">
-			{project.metadata.tags}
-			<h5>{project.metadata.title}</h5>
+				<h5>{project.metadata.title}</h5>
+				{#each project.metadata.tags as tag}
+				<button class="btn btn-primary">{tag}</button>
+				{/each}
 			</div>
 			<img src="{project.metadata.lead_image}" alt="{project.metadata.title} project cover" />
 		</div>
