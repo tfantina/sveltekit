@@ -1,0 +1,29 @@
+.profile-pic {
+  display: none;
+
+ &__mobile {
+   width: 100%;
+ }
+
+ &__mobile--container {
+   display: block;
+   float: right;
+   width: 65%;
+   margin-top: -50px;
+   margin-bottom: -2%;
+ }
+
+ @media (min-width: 768px) {
+   display: block;
+
+   &__mobile--container {
+     display: none;
+   }
+ }
+}
+
+
+
+.profile-pic--container {
+
+}

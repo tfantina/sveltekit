@@ -1,7 +1,7 @@
 <script context="module">
 	export const prerender = true;
 	export async function load({ fetch, page }) {
-		const res = await fetch(`/blog/blog.json?length=5`);
+		const res = await fetch(`/dispatches/dispatches.json?length=5`);
 		const projects = await fetch('/projects/projects.json');
 
 		console.log(projects);
