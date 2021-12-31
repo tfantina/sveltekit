@@ -24,18 +24,20 @@
 	import About from '$lib/index_page/About.svelte';
 	import Projects from '$lib/index_page/Projects.svelte';
 	import Dispatches from '$lib/index_page/Dispatches.svelte';
-	import Scroller from '@sveltejs/svelte-scroller';
 
-	let count, index, offset, progress, scrolly, height, background_scroll;
-
+	let scrolly, height, background_scroll;
+	const ONE = 1;
+	let opacity = ONE;
+	let scroller_value = .5;
 
 	export let posts, projects;
 
-
 	const scroller = () => {
-
+		scroller_value = scrolly/height
+		opacity = (ONE) - scroller_value
 		if(scrolly > height - 30){
-			background_scroll = "position: relative"
+			background_scroll = "overflow: absolute"
+
 		} else {
 			background_scroll =  "position: fixed"
 		}
@@ -49,48 +51,32 @@
 <svelte:window bind:scrollY={scrolly} bind:innerHeight={height} on:scroll={scroller}/>
 
 
-<div class="page">
-	<Scroller top={0.0} bottom={0.3} threshold={0} bind:count bind:index bind:offset bind:progress>
-		<div slot="background">
-			PROGRESS: {progress}
-			offset: {offset}
-			index: {index}
-			scroll: {scrolly};
-			height: {height}
-		</div>
-		<div slot="foreground">
-			<section />
-		</div>
-	</Scroller>
+<div class="intro-container">
 	<div class="intro">
-		<h1 style="opacity: {1 - progress}; transform: scale({1 * 1.1 + offset})">Travis Fantina</h1>
-		<h2 class="intro-heading" style="opacity: {1 - progress}; transform: scale({1 * 1.1 + offset})">
+		<h1 class="d-flex justify-content-center" style="opacity: {opacity}; transform: scale({1 * 1.8 + scroller_value})">Travis Fantina</h1>
+		<h2 class="intro-heading" style="opacity: {opacity}; transform: scale({1 * 1.2 + scroller_value})">
 			development & designs
 			<br />
 			a repository of projects and writings
 		</h2>
-		<div class="image" style="opacity: {1 - progress}; transform: scale({1 * 1 + offset})" />
+		<div class="image" style="opacity: {opacity}; transform: scale({1 * 1 + scroller_value})" />
 	</div>
 </div>
 
 <div class="bg-page" />
 <div class="scroller" style={background_scroll}>
-<About />
-<Projects  {projects} />
-<Dispatches {posts} />
+	<About />
+	<Projects  {projects} />
+	<Dispatches {posts} />
 </div>
 
 <style>
-	[slot='background'] {
-		height: 100vh;
-	}
-
 	section {
 		height: 100vh;
 		margin-bottom: 100vh;
 	}
 
-	.intro {
+	.intro-container {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -100,8 +86,17 @@
 		top: 0;
 		height: 100vh;
 		width: 100vw;
-		margin-bottom: 100vh;
 		color: var(--main-heading);
+	}
+
+	.intro {
+		position: relative;
+		height: 200vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
 	}
 
 	h1 {
