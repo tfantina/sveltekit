@@ -3,8 +3,7 @@
 	export async function load({ fetch, page }) {
 		const res = await fetch(`/dispatches/dispatches.json?length=5`);
 		const projects = await fetch('/projects/projects.json');
-
-		console.log(projects);
+		console.log(res);
 		if (res.ok && projects.ok) {
 			return {
 				props: {
@@ -27,14 +26,28 @@
 	import Dispatches from '$lib/index_page/Dispatches.svelte';
 	import Scroller from '@sveltejs/svelte-scroller';
 
-	let count, index, offset, progress;
+	let count, index, offset, progress, scrolly, height, background_scroll;
+
 
 	export let posts, projects;
+
+
+	const scroller = () => {
+
+		if(scrolly > height - 30){
+			background_scroll = "position: relative"
+		} else {
+			background_scroll =  "position: fixed"
+		}
+	}
+
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
+<svelte:window bind:scrollY={scrolly} bind:innerHeight={height} on:scroll={scroller}/>
+
 
 <div class="page">
 	<Scroller top={0.0} bottom={0.3} threshold={0} bind:count bind:index bind:offset bind:progress>
@@ -42,6 +55,8 @@
 			PROGRESS: {progress}
 			offset: {offset}
 			index: {index}
+			scroll: {scrolly};
+			height: {height}
 		</div>
 		<div slot="foreground">
 			<section />
@@ -59,9 +74,11 @@
 </div>
 
 <div class="bg-page" />
+<div class="scroller" style={background_scroll}>
 <About />
 <Projects  {projects} />
 <Dispatches {posts} />
+</div>
 
 <style>
 	[slot='background'] {
@@ -131,6 +148,15 @@
 	}
 
 	.bg-page {
-		height: 100vh;
+		position: absolute;
+		height: 200vh;
+		width: 100vw;
+		left: 0;
+		top: 0;
+		bottom: 0;
+
+	}
+
+	.scroller {
 	}
 </style>

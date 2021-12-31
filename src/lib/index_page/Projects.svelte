@@ -3,7 +3,7 @@
 	console.log(projects)
 </script>
 
-<div class="container">
+<div class="container vh-90">
 	<div class="row">
 		<h2>Projects</h2>
 	</div>

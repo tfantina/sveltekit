@@ -1,0 +1,71 @@
+@font-face {
+	font-family: 'Tropikal';
+	src: url('Tropikal-Bold.otf');
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	background-color: var(--primary-color);
+	font-family: 'Georgia', 'Times', serif;
+  font-size: 14px;
+}
+
+
+h1,
+h2,
+h5 {
+	font-family: 'Tropikal';
+}
+
+h1 {
+	font-size: 2.5rem;
+}
+
+h2 {
+	font-size: 2.25rem;
+  color: var(--titles);
+}
+
+h3 {
+  font-family: 'Futura', 'Montserrat', sans-serif;
+  font-size: 1.125rem;
+}
+
+h5 {
+	font-size: 1.5625rem;
+}
+
+p {
+	line-height: 1.4;
+}
+
+a {
+	color: var(--accent-color);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.meta {
+  font-family: 'Futura', 'Montserrat', sans-serif;
+  font-weight: lighter;
+  font-size: 0.6875rem;
+  color: var(--contrast-accent);
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 4.6875rem;
+  }
+
+  h2 {
+    font-size: 3.4375rem;
+  }
+}
+
+.vh-90 {
+  height: 90vh;
+}

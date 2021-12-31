@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container vh-100">
+	<div style="height: 100vh">
 	<div class="row">
 		<div class="col-md-6 col-12 order-2 order-md-1">
 			<div class="row">
@@ -28,10 +29,12 @@
 					</p>
 				</div>
 			</div>
-			<div class="row">
-				<button class="btn btn-secondary">Skills</button>
-				<button class="btn btn-secondary">Now</button>
-				<button class="btn btn-secondary">Uses</button>
+			<div class="row d-flex justify-content-center">
+				<div class="col-8 d-flex flex-column">
+						<button class="btn btn-secondary ">Skills</button>
+						<button class="btn btn-secondary">Now</button>
+						<button class="btn btn-secondary">Uses</button>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-6 col-12 order-1 order-md-2">
@@ -39,5 +42,6 @@
 				<img src="images/profile_pic.jpg" alt="This is a photo of me" class="profile-pic">
 			</div>
 		</div>
+	</div>
 	</div>
 </div>

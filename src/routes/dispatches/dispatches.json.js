@@ -7,10 +7,11 @@ export function get({ params, query }) {
 		.readdirSync(`src/posts`)
 		.filter((fileName) => /.+\.md$/.test(fileName))
 		.map((fileName) => {
-			const { metadata } = process(`src/posts/${fileName}`);
+			const { metadata, content } = process(`src/posts/${fileName}`);
 			return {
 				metadata,
-				slug: fileName.slice(0, -3)
+				slug: fileName.slice(0, -3),
+				content: content.slice(0, 800)
 			};
 		});
 
@@ -19,8 +20,9 @@ export function get({ params, query }) {
 	}
 	// sort the posts by create date.
 	posts.sort(
-		(a, b) => dayjs(a.metadata.date, 'MMM D, YYYY') - dayjs(b.metadata.date, 'MMM D, YYYY')
+		(a, b) => dayjs(b.metadata.date, 'MMM D, YYYY') - dayjs(a.metadata.date, 'MMM D, YYYY')
 	);
+
 	let body = JSON.stringify(posts);
 
 	return {
