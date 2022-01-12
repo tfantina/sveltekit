@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-6 col-12 order-2 order-md-1">
 			<div class="row">
-				<h2>About</h2>
+				<h2 class="mb-3">About</h2>
 				<div class="about">
 					<div class="profile-pic__mobile--container">
 						<img src="images/profile_pic.jpg" alt="This is a photo of me it shows on mobile devices" class="profile-pic__mobile">

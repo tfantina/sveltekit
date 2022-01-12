@@ -40,6 +40,13 @@ p {
 	line-height: 1.4;
 }
 
+.post-content {
+	p {
+		line-height: 1.8;
+		font-size: 1rem;
+	}
+}
+
 a {
 	color: var(--accent-color);
 	text-decoration: none;

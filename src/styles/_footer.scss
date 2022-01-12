@@ -1,0 +1,21 @@
+footer {
+  min-height: 9.375rem;
+  border-top: dashed 5px var(--pure-black);
+  background-color: var(--pure-white);
+
+  h3 {
+    font-family: 'Tropikal';
+    font-size: 2.25rem;
+    color: var(--sea-accent);
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+  }
+}

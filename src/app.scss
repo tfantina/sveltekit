@@ -5,15 +5,10 @@
 @import 'styles/bootstrap_overrides';
 @import 'styles/globals';
 @import 'styles/about';
+@import 'styles/dispatches';
 @import 'styles/projects';
+@import 'styles/footer';
 
-
-body {
-	min-height: 100vh;
-	margin: 0;
-	background-color: var(--primary-color);
-	font-family: 'Georgia', 'Times', serif;
-}
 
 input,
 button {
@@ -23,16 +18,6 @@ button {
 
 button:focus:not(:focus-visible) {
 	outline: none;
-}
-
-@media (min-width: 768px) {
-	h1 {
-		font-size: 5rem;
-	}
-
-	h2 {
-		font-size: 4.5rem;
-	}
 }
 
 body {

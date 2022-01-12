@@ -1,6 +1,10 @@
 <script>
 	import Header from '$lib/header/Header.svelte';
 	import '../app.scss';
+	import FooterIndex from '$lib/footers/FooterIndex.svelte';
+	import FooterOther from '$lib/footers/FooterOther.svelte';
+
+	import {page} from '$app/stores';
 </script>
 
 <Header />
@@ -10,7 +14,11 @@
 </main>
 
 <footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+	{#if $page.path == "/"}
+	<FooterIndex />
+	{:else}
+	<FooterOther />
+	{/if}
 </footer>
 
 <style>

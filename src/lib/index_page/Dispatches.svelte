@@ -3,10 +3,11 @@
 </script>
 
 <div class="container vh-90">
-<h2>Dispatches</h2>
+	<h2 class="mb-3">Dispatches</h2>
 	<div class="row">
 		<div class="col-6">
 			{#each posts.slice(0, 2) as post, i}
+				<a href="dispatches/{post.slug}">
 				<div class="row d-flex justify-content-between">
 					<div class="col-8">
 						<h3>{post.metadata.title}</h3>
@@ -24,6 +25,7 @@
 						</div>
 					{/if}
 				</div>
+				</a>
 			{/each}
 		</div>
 		<div class="col-6">

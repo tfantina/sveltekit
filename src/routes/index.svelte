@@ -3,7 +3,7 @@
 	export async function load({ fetch, page }) {
 		const res = await fetch(`/dispatches/dispatches.json?length=5`);
 		const projects = await fetch('/projects/projects.json');
-		console.log(res);
+
 		if (res.ok && projects.ok) {
 			return {
 				props: {
@@ -17,6 +17,7 @@
 			status: res.status,
 			error: new Error('Small problem')
 		};
+
 	}
 </script>
 
@@ -24,6 +25,8 @@
 	import About from '$lib/index_page/About.svelte';
 	import Projects from '$lib/index_page/Projects.svelte';
 	import Dispatches from '$lib/index_page/Dispatches.svelte';
+	import Contact from '$lib/index_page/Contact.svelte';
+
 
 	let scrolly, height, background_scroll;
 	const ONE = 1;
@@ -32,16 +35,38 @@
 
 	export let posts, projects;
 
+			 //
+	     // let scrollTop = null;
+	     // let scrollLeft = null;
+			 //
+	     // function disableScroll() {
+				//  console.log("wow")
+	     //     if (browser) {
+	     //         scrollTop =
+	     //             window.pageYOffset || window.document.documentElement.scrollTop;
+	     //         scrollLeft =
+	     //             window.pageXOffset || window.document.documentElement.scrollLeft,
+	     //             window.onscroll = function() {
+	     //             window.scrollTo(scrollLeft, scrollTop);
+	     //         }};
+	     //     }
+
 	const scroller = () => {
 		scroller_value = scrolly/height
 		opacity = (ONE) - scroller_value
 		if(scrolly > height - 30){
-			background_scroll = "overflow: absolute"
-
+			background_scroll = "position: relative"
 		} else {
+			disableScroll();
 			background_scroll =  "position: fixed"
 		}
 	}
+
+     // function enableScroll() {
+     //     if (browser) {
+     //         window.onscroll = function() {};
+     //     }
+			//  }
 
 </script>
 
@@ -68,6 +93,7 @@
 	<About />
 	<Projects  {projects} />
 	<Dispatches {posts} />
+	<Contact />
 </div>
 
 <style>
@@ -96,7 +122,6 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-
 	}
 
 	h1 {

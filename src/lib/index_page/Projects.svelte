@@ -1,11 +1,10 @@
 <script>
 	export let projects;
-	console.log(projects)
 </script>
 
 <div class="container vh-90">
 	<div class="row">
-		<h2>Projects</h2>
+		<h2 class="mb-3">Projects</h2>
 	</div>
 	<div class="row">
 		{#each projects as project}
