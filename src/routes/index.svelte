@@ -1,4 +1,5 @@
 <script context="module">
+export const ssr = false;
 	export const prerender = true;
 	export async function load({ fetch, page }) {
 		const res = await fetch(`/dispatches/dispatches.json?length=5`);
@@ -22,102 +23,75 @@
 </script>
 
 <script>
+	import { onMount } from 'svelte';
 	import About from '$lib/index_page/About.svelte';
 	import Projects from '$lib/index_page/Projects.svelte';
 	import Dispatches from '$lib/index_page/Dispatches.svelte';
 	import Contact from '$lib/index_page/Contact.svelte';
+	import { gsap } from 'gsap';
+	import ScrollMagic from 'scrollmagic'
+	import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap'
 
 
-	let scrolly, height, background_scroll;
-	const ONE = 1;
-	let opacity = ONE;
-	let scroller_value = .5;
+
+
+
+
+	onMount(() => {
+		const updatePercentage = () => {
+			tl.progress();
+		}
+
+		ScrollMagicPluginGsap(ScrollMagic, gsap)
+		let tl = gsap.timeline({onUpdate:updatePercentage});
+
+		tl.to("#fern", 2, {opacity: 0, scale: 1.8});
+		tl.to("h1", 2, {opacity: 0, scale: 1.4});
+		const controller = new ScrollMagic.Controller();
+
+	const scene = new ScrollMagic.Scene({
+		triggerElement: ".intro",
+		triggerHook: "onLeave",
+		duration: "100%"
+	}).setPin(".intro")
+	.setTween(tl)
+	.addTo(controller);
+})
+
+
 
 	export let posts, projects;
 
-			 //
-	     // let scrollTop = null;
-	     // let scrollLeft = null;
-			 //
-	     // function disableScroll() {
-				//  console.log("wow")
-	     //     if (browser) {
-	     //         scrollTop =
-	     //             window.pageYOffset || window.document.documentElement.scrollTop;
-	     //         scrollLeft =
-	     //             window.pageXOffset || window.document.documentElement.scrollLeft,
-	     //             window.onscroll = function() {
-	     //             window.scrollTo(scrollLeft, scrollTop);
-	     //         }};
-	     //     }
-
-	const scroller = () => {
-		scroller_value = scrolly/height
-		opacity = (ONE) - scroller_value
-		if(scrolly > height - 30){
-			background_scroll = "position: relative"
-		} else {
-			disableScroll();
-			background_scroll =  "position: fixed"
-		}
-	}
-
-     // function enableScroll() {
-     //     if (browser) {
-     //         window.onscroll = function() {};
-     //     }
-			//  }
 
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
-<svelte:window bind:scrollY={scrolly} bind:innerHeight={height} on:scroll={scroller}/>
 
 
-<div class="intro-container">
-	<div class="intro">
-		<h1 class="d-flex justify-content-center" style="opacity: {opacity}; transform: scale({1 * 1.8 + scroller_value})">Travis Fantina</h1>
-		<h2 class="intro-heading" style="opacity: {opacity}; transform: scale({1 * 1.2 + scroller_value})">
-			development & designs
-			<br />
-			a repository of projects and writings
-		</h2>
-		<div class="image" style="opacity: {opacity}; transform: scale({1 * 1 + scroller_value})" />
-	</div>
-</div>
-
-<div class="bg-page" />
-<div class="scroller" style={background_scroll}>
+<div class="intro">
+	<img src="images/fern-bg.png" id="fern" alt="Hero Background: Ferns" />
+	<h1 class="d-flex justify-content-center" id="title">Travis Fantina</h1>
+	<h2 class="intro-heading">
+		development & designs
+		<br />
+		a repository of projects and writings
+	</h2>
 	<About />
-	<Projects  {projects} />
-	<Dispatches {posts} />
-	<Contact />
 </div>
+
+
+<Projects  {projects} />
+<Dispatches {posts} />
+<Contact />
+
 
 <style>
-	section {
-		height: 100vh;
-		margin-bottom: 100vh;
-	}
-
-	.intro-container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		position: absolute;
-		left: 0;
-		top: 0;
+	.intro {
 		height: 100vh;
 		width: 100vw;
-		color: var(--main-heading);
-	}
-
-	.intro {
-		position: relative;
-		height: 200vh;
+		left: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -128,6 +102,7 @@
 		position: fixed;
 		z-index: 100;
 		height: 240px;
+		color: var(--main-heading);
 	}
 
 	h2.intro-heading {
@@ -139,16 +114,11 @@
 		z-index: 100;
 	}
 
-	.image {
-		background-image: url('/images/fern-bg.png');
+	#fern {
 		background-size: cover;
 		height: 100vh;
 		width: 100vw;
-		margin-bottom: 100vh;
-		position: fixed;
-		left: 0;
-		top: 0;
-		z-index: 10;
+		position: absolute;
 	}
 
 	h1 {
@@ -162,19 +132,9 @@
 	.page {
 		height: 100vh;
 		width: 100vw;
-		position: absolute;
 		top: 0;
 		left: 0;
-	}
-
-	.bg-page {
-		position: absolute;
-		height: 200vh;
-		width: 100vw;
-		left: 0;
-		top: 0;
-		bottom: 0;
-
+		min-height: 100vh;
 	}
 
 	.scroller {
