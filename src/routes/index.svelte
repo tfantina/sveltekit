@@ -1,5 +1,5 @@
 <script context="module">
-export const ssr = false;
+	export const ssr = false;
 	export const prerender = true;
 	export async function load({ fetch, page }) {
 		const res = await fetch(`/dispatches/dispatches.json?length=5`);
@@ -18,7 +18,6 @@ export const ssr = false;
 			status: res.status,
 			error: new Error('Small problem')
 		};
-
 	}
 </script>
 
@@ -29,73 +28,86 @@ export const ssr = false;
 	import Dispatches from '$lib/index_page/Dispatches.svelte';
 	import Contact from '$lib/index_page/Contact.svelte';
 	import { gsap } from 'gsap';
-	import ScrollMagic from 'scrollmagic'
-	import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap'
-
-
-
-
-
+	import ScrollMagic from 'scrollmagic';
+	import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
 	onMount(() => {
 		const updatePercentage = () => {
 			tl.progress();
-		}
+		};
 
-		ScrollMagicPluginGsap(ScrollMagic, gsap)
-		let tl = gsap.timeline({onUpdate:updatePercentage});
+		ScrollMagicPluginGsap(ScrollMagic, gsap);
+		let tl = gsap.timeline({ onUpdate: updatePercentage });
+		let tl2 = gsap;
 
-		tl.to("#fern", 2, {opacity: 0, scale: 1.8});
-		tl.to("h1", 2, {opacity: 0, scale: 1.4});
+		tl.add('hero')
+			.to('#fern', 1, { opacity: 0, scale: 1.5 }, 'hero')
+			.to('h1', 1.2, { opacity: 0, scale: 1.2 }, 'hero')
+			.to('.intro-heading', 1.5, { opacity: 0, scale: 1.3 }, 'hero');
 		const controller = new ScrollMagic.Controller();
 
-	const scene = new ScrollMagic.Scene({
-		triggerElement: ".intro",
-		triggerHook: "onLeave",
-		duration: "100%"
-	}).setPin(".intro")
-	.setTween(tl)
-	.addTo(controller);
-})
-
-
+		const scene = new ScrollMagic.Scene({
+			triggerElement: '.intro',
+			triggerHook: 'onLeave',
+			duration: '110%'
+		})
+			.setPin('.intro')
+			.setTween(tl)
+			.addTo(controller);
+	});
 
 	export let posts, projects;
-
-
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-
-<div class="intro">
-	<img src="images/fern-bg.png" id="fern" alt="Hero Background: Ferns" />
+<div class="holder">
+	<img src="images/jungle.jpg" id="fern" alt="Hero Background: Ferns" />
 	<h1 class="d-flex justify-content-center" id="title">Travis Fantina</h1>
 	<h2 class="intro-heading">
 		development & designs
 		<br />
 		a repository of projects and writings
 	</h2>
-	<About />
 </div>
 
+<div class="intro">
+	<About />
+	<Projects {projects} />
 
-<Projects  {projects} />
-<Dispatches {posts} />
-<Contact />
-
+	<Dispatches {posts} />
+	<Contact />
+</div>
 
 <style>
 	.intro {
-		height: 100vh;
+		min-height: 100vh;
 		width: 100vw;
 		left: 0;
+		top: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		position: absolute;
+		z-index: 50;
+	}
+
+	.holder {
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		z-index: 100;
+	}
+
+	.page {
+		position: absolute;
 	}
 
 	h1 {
@@ -119,6 +131,7 @@ export const ssr = false;
 		height: 100vh;
 		width: 100vw;
 		position: absolute;
+		top: 0;
 	}
 
 	h1 {

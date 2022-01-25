@@ -2,6 +2,7 @@
 	export let projects;
 </script>
 
+<div class="body-bg" id="projects">
 <div class="container vh-90">
 	<div class="row">
 		<h2 class="mb-3">Projects</h2>
@@ -25,4 +26,5 @@
 		</a>
 		{/each}
 	</div>
+</div>
 </div>

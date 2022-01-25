@@ -1,4 +1,4 @@
-<div class="container vh-90">
+<div class="container vh-90 body-bg">
   <div class="row">
    <h2 class="mb-3">Contact</h2>
   </div>

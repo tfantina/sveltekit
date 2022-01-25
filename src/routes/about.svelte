@@ -18,7 +18,7 @@
 	<title>About</title>
 </svelte:head>
 
-<div class="content">
+<div class="content mt-5">
 	<h1>About this app</h1>
 
 	<p>
