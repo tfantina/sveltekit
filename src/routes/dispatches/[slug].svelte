@@ -12,14 +12,14 @@
 <script>
 	export let post;
 
-		const altText = () => {
-			if(post.metadata.alt_text) {
-				return post.metadata.alt_text
-			} else {
-				return `Blog Photo for ${post.metadata.title}`;
-			}
-
+	const altText = () => {
+		if(post.metadata.alt_text) {
+			return post.metadata.alt_text
+		} else {
+			return `Blog Photo for ${post.metadata.title}`;
 		}
+	}
+		
 </script>
 
 <!--show the post html with @html-->
