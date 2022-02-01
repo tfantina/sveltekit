@@ -41,19 +41,22 @@
 		let tl2 = gsap;
 
 		tl.add('hero')
-			.to('#fern', 1, { opacity: 0, scale: 1.5 }, 'hero')
-			.to('h1', 1.2, { opacity: 0, scale: 1.2 }, 'hero')
-			.to('.intro-heading', 1.5, { opacity: 0, scale: 1.3 }, 'hero');
+			.to('#fern', 1, { opacity: 0, scale: 1.5, display: "none" }, 'hero')
+			.to('h1', 1.2, { opacity: 0, scale: 1.2, display: "none" }, 'hero')
+			.to('.intro-heading', 1.5, { opacity: 0, scale: 1.3, display: "none" }, 'hero')
+			.from('.about-buttons', 3, {opacity: 0});
+
 		const controller = new ScrollMagic.Controller();
 
 		const scene = new ScrollMagic.Scene({
 			triggerElement: '.intro',
 			triggerHook: 'onLeave',
-			duration: '110%'
+			duration: '80%'
 		})
 			.setPin('.intro')
 			.setTween(tl)
 			.addTo(controller);
+
 	});
 
 	export let posts, projects;
@@ -65,7 +68,7 @@
 
 <div class="holder">
 	<img src="images/jungle.jpg" id="fern" alt="Hero Background: Ferns" />
-	<h1 class="d-flex justify-content-center" id="title">Travis Fantina</h1>
+	<h1 class="justify-content-center" id="title">Travis Fantina</h1>
 	<h2 class="intro-heading">
 		development & designs
 		<br />
